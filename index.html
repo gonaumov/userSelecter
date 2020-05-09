@@ -5,14 +5,36 @@
     <title>User selector</title>
 </head>
 <body>
-<a href='javascript:void%20function(){const%20a=prompt(%22Please%20select%20a%20number%20of%20the%20user%20which%20you%20want%20to%20select:%22);if(!1===/^[1-9][0-9]*$/.test(a))return%20void%20alert(%22Please%20enter%20only%20decimal%20numbers!%22);const%20b=parseInt(a,10),c=b-1,d=Array.from(document.querySelectorAll(%22._54_6._4-ss._4-sv%20a[data-hovercard]%22)).reverse();if(%22undefined%22==typeof%20d[c])return%20void%20alert(%22There%20are%20not%20enough%20likes.%20You%20have%20only%20%22+d.length);alert(%22Selected%20number%20%22+b+%22%20from%20%22+d.length+%22%20users.%22);const%20e=d[c];e.style.backgroundColor=%22coral%22,e.scrollIntoView()}();'>
- Select user from likes
+<a id="bookmarkLet" href="">
+    Select user from likes
 </a>
 <div>
-This bookmarklet selects a user who liked a facebook page from the list.
-Usage. If you want to select the first user who liked you page
-you must type one in the input box. How to install it?
-Just drag and drop the link in your browser bookmark tab.
+    This bookmarklet selects a user who liked a facebook page from the list.
+    Usage. If you want to select the first user who liked you page
+    you must type one in the input box. How to install it?
+    Just drag and drop the link in your browser bookmark tab.
 </div>
+<script>
+    const functionSource = (function () {
+        const inputNumber = prompt('Please select a number of the user which you want to select:');
+        if ((new RegExp('^[1-9][0-9]*$')).test(inputNumber) === false) {
+            alert('Please enter only decimal numbers!');
+            return;
+        }
+        const winnerNumber = parseInt(inputNumber, 10);
+        const wantedNumber = winnerNumber - 1;
+        const winners = Array.from(document.querySelectorAll('._54_6._4-ss._4-sv a[data-hovercard]')).reverse();
+        if (typeof winners[wantedNumber] === 'undefined') {
+            alert('There are not enough likes. You have only ' + winners.length);
+            return;
+        }
+        alert('Selected number ' + winnerNumber + ' from ' + winners.length + ' users.')
+        const winner = winners[wantedNumber];
+        winner.style.backgroundColor = 'coral';
+        winner.scrollIntoView();
+    })
+    const link = document.getElementById('bookmarkLet');
+    link.setAttribute('href', 'javascript:(' + encodeURIComponent(functionSource.toString() + ')()'));
+</script>
 </body>
 </html>
