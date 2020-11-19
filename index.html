@@ -23,7 +23,8 @@
         }
         const winnerNumber = parseInt(inputNumber, 10);
         const wantedNumber = winnerNumber - 1;
-        const winners = Array.from(document.querySelectorAll('._54_6._4-ss._4-sv a[data-hovercard]')).reverse();
+        const _document = document.querySelector("iframe").contentWindow.document;
+        const winners = Array.from(_document.querySelectorAll('._54_6._4-ss._4-sv a[data-hovercard]')).reverse();
         if (typeof winners[wantedNumber] === 'undefined') {
             alert('There are not enough likes. You have only ' + winners.length);
             return;
